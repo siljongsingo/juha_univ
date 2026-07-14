@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>김주하 대학입시 관심학과 입결</title>
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+:root{
+  --font:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic','맑은 고딕',Arial,sans-serif;
+  --bg:#f6f5f0;--card:#fff;--border:#e8e6df;
+  --text:#1a1a18;--muted:#73726c;--hint:#a3a29c;
+  --blue:#185FA5;--blue-bg:#E6F1FB;
+  --red:#A32D2D;--red-bg:#FCEBEB;
+  --green:#3B6D11;--green-bg:#EAF3DE;
+  --purple:#534AB7;--purple-bg:#EEEDFE;
+  --teal:#0F6E56;--teal-bg:#E1F5EE;
+  --amber:#854F0B;--amber-bg:#FAEEDA;
+  --orange:#BF360C;--orange-bg:#FFF3E0;
+  --pink:#9C2A6D;--pink-bg:#FCEEF6;
+  --r:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14px;font-weight:300;line-height:1.5;padding-bottom:68px}
+
+/* ── 헤더 ── */
+.hdr{background:linear-gradient(135deg,#1a1a18,#2d2d2a);padding:14px 16px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hdr-title{font-size:16px;font-weight:700;letter-spacing:-.3px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ── 래퍼 ── */
+.wrap{padding:14px 14px;max-width:1200px;margin:0 auto}
+
+/* ── 경고 ── */
+.alert{background:var(--amber-bg);border:1px solid #e8c87a;border-radius:8px;padding:10px 12px;font-size:11.5px;color:var(--amber);margin-bottom:14px;line-height:1.6}
+.alert strong{font-weight:600}
+
+/* ── 하단 탭 (모바일) ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--card);border-top:1px solid var(--border);display:flex;height:58px}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:none;background:none;font-family:var(--font);font-size:10px;font-weight:500;color:var(--hint);cursor:pointer;transition:color .15s;padding:6px 2px}
+.bnav-btn .icon{font-size:20px;line-height:1}
+.bnav-btn.on{color:var(--purple);font-weight:700}
+
+/* ── 상단 탭 (데스크톱) ── */
+.desk-tabs{display:none;border-bottom:2px solid var(--border);margin-bottom:16px;flex-wrap:wrap}
+.dtab{padding:10px 22px;font-size:13px;font-weight:500;color:var(--muted);border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;transition:all .15s;font-family:var(--font);white-space:nowrap}
+.dtab.on{color:var(--text);border-bottom-color:var(--purple);font-weight:700}
+
+.tab-panel{display:none}
+.tab-panel.on{display:block}
+
+/* ── 섹션 헤더 ── */
+.sh{display:flex;align-items:center;gap:8px;margin:18px 0 10px}
+.sh-badge{display:inline-block;padding:5px 14px;border-radius:16px;font-size:12px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.sh-cnt{font-size:11px;color:var(--hint);white-space:nowrap}
+.sh-line{flex:1;height:1px;background:var(--border)}
+
+/* ── 카드 그리드 ── */
+.cgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:6px}
+
+/* ── 카드 ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:13px 14px 12px 18px;position:relative;overflow:hidden;transition:box-shadow .15s}
+.card:hover{box-shadow:0 3px 14px rgba(0,0,0,.09)}
+/* 왼쪽 컬러 바 */
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:var(--r) 0 0 var(--r)}
+/* 간호 레벨 */
+.card.lv1a::before{background:linear-gradient(180deg,#FFD700,#FFA500)}
+.card.lv1b::before{background:#185FA5}
+.card.lv1c::before{background:#534AB7}
+.card.lv1d::before{background:#0F6E56}
+.card.lv2a::before{background:#3B6D11}
+.card.lv2b::before{background:#854F0B}
+.card.lv3::before{background:#A32D2D}
+/* 기타학과 레벨 */
+.card.ot-a::before{background:linear-gradient(180deg,#9C2A6D,#C2185B)}
+.card.ot-b::before{background:#185FA5}
+/* 대구경북 배경 */
+.card.dg{background:#fffdf8;border-color:#eeddc8}
+
+/* 카드 헤더 */
+.card-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px}
+.card-rank{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.rk-gold{background:#FFF8DC;color:#B8860B;border:1.5px solid #DAA520}
+.rk-silv{background:#F5F5F5;color:#808080;border:1.5px solid #C0C0C0}
+.rk-bron{background:#FFF0E8;color:#CD7F32;border:1.5px solid #CD7F32}
+.rk-norm{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.card-nc{flex:1;min-width:0}
+.card-name{font-size:14px;font-weight:700;line-height:1.3}
+.card-loc{font-size:11px;color:var(--hint);margin-top:2px}
+
+/* 뱃지 */
+.cbadges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px}
+.bd{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
+.b4{background:var(--blue-bg);color:var(--blue)}
+.bjr{background:var(--teal-bg);color:var(--teal)}
+.bsp{background:var(--purple-bg);color:var(--purple)}
+.bnat{background:var(--orange-bg);color:var(--orange)}
+.bpink{background:var(--pink-bg);color:var(--pink)}
+.rg-cap{background:var(--blue-bg);color:var(--blue)}
+.rg-dg{background:var(--orange-bg);color:var(--orange)}
+.rg-gyb{background:#F3E5F5;color:#6A1B9A}
+
+/* 스탯 박스 */
+.cstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px}
+.sbox{background:#fafaf8;border-radius:7px;padding:7px 9px;border:1px solid var(--border)}
+.slabel{font-size:9px;color:var(--hint);font-weight:500;letter-spacing:.2px;margin-bottom:3px;text-transform:uppercase}
+.sval{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gbar{height:4px;border-radius:2px;background:var(--border);margin-top:4px}
+.gbarf{height:100%;border-radius:2px}
+.gp{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;white-space:nowrap}
+.p1a{background:#e6f1fb;color:#185FA5}
+.p1b{background:#eeedfe;color:#534AB7}
+.p2{background:#e1f5ee;color:#0F6E56}
+.p3{background:#eaf3de;color:#3B6D11}
+.ppink{background:var(--pink-bg);color:var(--pink)}
+
+/* 특이사항 */
+.cnote{font-size:11px;color:var(--muted);line-height:1.5;padding-top:5px;border-top:1px solid var(--border)}
+
+/* 국군간호사관학교 특수 */
+.knmc-card{background:linear-gradient(135deg,#f8f9ff,#eef0ff);border:2px solid #1a237e}
+.knmc-card::before{background:linear-gradient(180deg,#1a237e,#3949ab)}
+
+/* ── 각주 ── */
+.fn{margin-top:16px;font-size:11px;color:var(--hint);line-height:1.9}
+.fn li{list-style:none;padding-left:14px;position:relative;margin-bottom:2px}
+.fn li::before{content:'※';position:absolute;left:0}
+
+/* ── 반응형 ── */
+@media(min-width:600px){
+  body{padding-bottom:0}
+  .bottom-nav{display:none}
+  .desk-tabs{display:flex}
+  .hdr{padding:14px 28px}
+  .hdr-title{font-size:17px}
+  .wrap{padding:18px 28px}
+}
+@media(min-width:760px){.cgrid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.cgrid{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="hdr">
+  <div class="hdr-title">👩‍🎓 김주하 관심학과 대학 입시결과 / 2026년도</div>
+</div>
+
+<!-- 데스크톱 탭 -->
+<div class="wrap" style="padding-bottom:0">
+  <div class="desk-tabs">
+    <button class="dtab on"  data-target="nursing" onclick="switchTab(this,'nursing')">🏥 간호학과 (42개교)</button>
+    <button class="dtab"     data-target="other"   onclick="switchTab(this,'other')">📚 기타 관심학과 (2개교)</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="alert">
+    <strong>⚠️ 참고:</strong> 아래 등급컷은 <strong>2025학년도 기반 추정치</strong>입니다. 반드시 각 대학 입학처 공식 발표를 최종 확인하세요.
+  </div>
+
+  <!-- 간호학과 탭 -->
+  <div id="tab-nursing" class="tab-panel on"></div>
+
+  <!-- 기타 관심학과 탭 -->
+  <div id="tab-other" class="tab-panel">
+    <!-- 한동대 자유전공 -->
+    <div class="sh">
+      <span class="sh-badge" style="background:linear-gradient(135deg,#6A1B9A,#8E24AA);color:#fff">🔷 한동대학교 — 자유전공 (전학부)</span>
+      <div class="sh-line"></div>
+    </div>
+    <div class="cgrid" id="cgrid-handong"></div>
+
+    <!-- 가톨릭대 사회복지 -->
+    <div class="sh" style="margin-top:20px">
+      <span class="sh-badge" style="background:linear-gradient(135deg,#1565C0,#1976D2);color:#fff">🔹 가톨릭대학교(성심·부천) — 사회복지학과</span>
+      <div class="sh-line"></div>
+    </div>
+    <div class="cgrid" id="cgrid-catholic"></div>
+  </div>
+
+  <ul class="fn">
+    <li>등급컷은 2025학년도 입시결과 기반 추정치이며, 2026학년도 공식 발표와 다를 수 있습니다.</li>
+    <li>한동대학교는 전 학부 단일 모집 (전공 1학년 수료 후 선택), 포항 캠퍼스 소재입니다.</li>
+    <li>가톨릭대학교 사회복지학과는 성심교정(부천)에 위치하며, 간호학과(성의교정·서초)와 캠퍼스가 다릅니다.</li>
+    <li>⭐ 표시는 부속·연계 병원이 있는 학교입니다. 최종 확인: adiga.kr</li>
+  </ul>
+</div>
+
+<!-- 하단 탭 (모바일) -->
+<nav class="bottom-nav">
+  <button class="bnav-btn on" data-target="nursing" onclick="switchTab(this,'nursing')">
+    <span class="icon">🏥</span>간호학과
+  </button>
+  <button class="bnav-btn" data-target="other" onclick="switchTab(this,'other')">
+    <span class="icon">📚</span>기타학과
+  </button>
+</nav>
+
+<script>
+// ──────── 간호학과 데이터 ────────
+const NURSING=[
+  {r:'cap',nm:'서울대학교 ⭐',          lc:'서울 관악',   tp:'4년제',      fm:'학생부종합',     g9:'최상위(~1.0)',g9c:'#A32D2D',gp:9, g5:'1등급 최초반',     gc:'p1a',cp:'5:1',    cpct:20, nt:'국내 최고 · 서울대병원 연계',           lv:'lv1a',sv:1.0},
+  {r:'cap',nm:'연세대학교 ⭐',           lc:'서울 서대문', tp:'4년제',      fm:'학생부종합',     g9:'1.0~1.5',    g9c:'#A32D2D',gp:13,g5:'1등급 초반',       gc:'p1a',cp:'15:1',   cpct:60, nt:'세브란스병원 · 종합전형만',             lv:'lv1a',sv:1.25},
+  {r:'cap',nm:'고려대학교 ⭐',           lc:'서울 성북',   tp:'4년제',      fm:'교과·종합',      g9:'1.5~2.0',    g9c:'#185FA5',gp:18,g5:'1등급 초·중반',   gc:'p1a',cp:'20:1',   cpct:80, nt:'고대병원 연계',                         lv:'lv1b',sv:1.75},
+  {r:'cap',nm:'가톨릭대학교 ⭐',         lc:'서울 서초',   tp:'4년제',      fm:'교과·종합',      g9:'1.5~2.0',    g9c:'#185FA5',gp:18,g5:'1등급 초·중반',   gc:'p1a',cp:'29.6:1', cpct:100,nt:'가톨릭중앙의료원 · 종합 최고경쟁률', lv:'lv1b',sv:1.75},
+  {r:'cap',nm:'한양대학교 ⭐',           lc:'서울 성동',   tp:'4년제',      fm:'교과·종합',      g9:'1.5~2.0',    g9c:'#185FA5',gp:18,g5:'1등급 초·중반',   gc:'p1a',cp:'20.9:1', cpct:84, nt:'교과 4명 소수 선발 · 한양대병원',     lv:'lv1b',sv:1.75},
+  {r:'cap',nm:'서울여자간호대학교 ⭐',   lc:'서울 노원',   tp:'간호전문',   fm:'학생부교과',     g9:'1.5~2.0',    g9c:'#185FA5',gp:18,g5:'1등급 초·중반',   gc:'p1a',cp:'30:1↑',  cpct:100,nt:'간호 단일학과 · 취업률 최상위',     lv:'lv1b',sv:1.75},
+  {r:'dg', nm:'경북대학교 ⭐',           lc:'대구 북구',   tp:'국립 4년제', fm:'교과·종합·논술', g9:'1.5~2.0',    g9c:'#185FA5',gp:18,g5:'1등급 초·중반',   gc:'p1a',cp:'15~20:1',cpct:80, nt:'정원 116명 전국 최다 · 경북대병원',  lv:'lv1b',sv:1.75},
+  {r:'cap',nm:'이화여자대학교 ⭐',       lc:'서울 마포',   tp:'4년제',      fm:'교과·종합',      g9:'1.8~2.2',    g9c:'#185FA5',gp:21,g5:'1등급 초·중반',   gc:'p1a',cp:'25:1',   cpct:90, nt:'이대목동병원 연계 · 교과 16명',       lv:'lv1c',sv:2.0},
+  {r:'cap',nm:'중앙대학교 ⭐',           lc:'서울 동작',   tp:'4년제',      fm:'교과·종합·논술', g9:'1.8~2.3',    g9c:'#185FA5',gp:22,g5:'1등급 초·중반',   gc:'p1a',cp:'20~22:1',cpct:85, nt:'교과 27명 최다 · 중앙대병원',         lv:'lv1c',sv:2.05},
+  {r:'cap',nm:'경희대학교 ⭐',           lc:'서울 동대문', tp:'4년제',      fm:'교과·종합·논술', g9:'1.8~2.5',    g9c:'#534AB7',gp:23,g5:'1등급 중~후반',   gc:'p1b',cp:'18:1',   cpct:72, nt:'경희의료원 연계',                       lv:'lv1c',sv:2.15},
+  {r:'cap',nm:'아주대학교 ⭐',           lc:'경기 수원',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.3',    g9c:'#185FA5',gp:23,g5:'1등급 중반',      gc:'p1a',cp:'15:1',   cpct:60, nt:'교과 7명 소수 · 아주대병원',           lv:'lv1c',sv:2.15},
+  {r:'cap',nm:'을지대학교(의정부) ⭐',   lc:'경기 의정부', tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'20:1',   cpct:80, nt:'을지병원 연계 실습',                   lv:'lv1c',sv:2.25},
+  {r:'cap',nm:'가천대(메디컬) ⭐',       lc:'인천 연수',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'23.8:1', cpct:95, nt:'교과 28명 최다 모집',                   lv:'lv1c',sv:2.25},
+  {r:'cap',nm:'인하대학교 ⭐',           lc:'인천 미추홀', tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'18:1',   cpct:72, nt:'인하대병원 · 교과 17명',               lv:'lv1c',sv:2.25},
+  {r:'cap',nm:'차의과학대학교 ⭐',       lc:'경기 포천',   tp:'4년제',      fm:'학생부종합',     g9:'2.0~2.5',    g9c:'#534AB7',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'높음',   cpct:70, nt:'CHA병원 연계 · 종합전형 강세',       lv:'lv1c',sv:2.25},
+  {r:'cap',nm:'삼육보건대학교',          lc:'서울 노원',   tp:'전문대(4년)',fm:'학생부교과',     g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'높음',   cpct:75, nt:'서울 전문대 최상위권',                 lv:'lv1c',sv:2.25},
+  {r:'dg', nm:'계명대학교 ⭐',           lc:'대구 달서',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'20:1',   cpct:80, nt:'계명대동산병원 연계',                   lv:'lv1c',sv:2.25},
+  {r:'dg', nm:'동국대학교 WISE ⭐',      lc:'경북 경주',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'15~20:1',cpct:78, nt:'일산병원 원거리실습 · 기숙사 지원',  lv:'lv1c',sv:2.25},
+  {r:'dg', nm:'대구가톨릭대학교 ⭐',     lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'2.3~2.8',    g9c:'#534AB7',gp:28,g5:'1등급 중~후반',   gc:'p1b',cp:'15:1',   cpct:60, nt:'대구가톨릭대병원 · 42명 모집',       lv:'lv1d',sv:2.55},
+  {r:'dg', nm:'영남대학교 ⭐',           lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'2.3~2.8',    g9c:'#534AB7',gp:28,g5:'1등급 중~후반',   gc:'p1b',cp:'15:1',   cpct:60, nt:'영남대병원 · 지역인재 강세',           lv:'lv1d',sv:2.55},
+  {r:'cap',nm:'삼육대학교',              lc:'서울 노원',   tp:'4년제',      fm:'교과·종합',      g9:'2.5~3.0',    g9c:'#534AB7',gp:30,g5:'1등급 후반',      gc:'p1b',cp:'20:1↑',  cpct:80, nt:'국가고시 합격률 최우수권',             lv:'lv1d',sv:2.75},
+  {r:'cap',nm:'서일대학교',              lc:'서울 중랑',   tp:'전문대(4년)',fm:'학생부교과',     g9:'2.5~3.0',    g9c:'#534AB7',gp:30,g5:'1등급 후반',      gc:'p1b',cp:'높음',   cpct:65, nt:'서울권 전문대',                         lv:'lv1d',sv:2.75},
+  {r:'dg', nm:'국립경국대(구 안동대) ⭐',lc:'경북 안동',   tp:'국립 4년제', fm:'교과·종합',      g9:'2.5~3.0',    g9c:'#534AB7',gp:30,g5:'1등급 후반',      gc:'p1b',cp:'12:1',   cpct:48, nt:'국립대 혜택 · 지역인재 비중 높음',   lv:'lv1d',sv:2.75},
+  {r:'dg', nm:'대구한의대학교',          lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'2.8~3.3',    g9c:'#0F6E56',gp:32,g5:'1등급 후반~2등급',gc:'p2', cp:'12:1',   cpct:48, nt:'한의대 부설 병원 연계',                 lv:'lv2a',sv:3.05},
+  {r:'dg', nm:'대구보건대학교',          lc:'대구 동구',   tp:'전문대(4년)',fm:'학생부교과',     g9:'2.8~3.5',    g9c:'#0F6E56',gp:32,g5:'1등급 후반~2등급',gc:'p2', cp:'높음',   cpct:65, nt:'대구 전문대 최상위권 · 취업 우수',   lv:'lv2a',sv:3.15},
+  {r:'cap',nm:'수원대학교',              lc:'경기 화성',   tp:'4년제',      fm:'교과·종합',      g9:'3.0~3.5',    g9c:'#0F6E56',gp:33,g5:'2등급 초·중반',   gc:'p2', cp:'12:1',   cpct:48, nt:'교과 중심 선발',                       lv:'lv2a',sv:3.25},
+  {r:'cap',nm:'성결대학교',              lc:'경기 안양',   tp:'4년제',      fm:'교과·종합',      g9:'3.0~3.5',    g9c:'#0F6E56',gp:33,g5:'2등급 초·중반',   gc:'p2', cp:'12:1',   cpct:48, nt:'수능최저 있음',                         lv:'lv2a',sv:3.25},
+  {r:'cap',nm:'수원여자대학교',          lc:'경기 수원',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.0~3.5',    g9c:'#0F6E56',gp:33,g5:'2등급 초·중반',   gc:'p2', cp:'보통',   cpct:35, nt:'여학생 전용 전문대',                   lv:'lv2a',sv:3.25},
+  {r:'dg', nm:'대구대학교',              lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'3.0~3.5',    g9c:'#0F6E56',gp:33,g5:'2등급 초·중반',   gc:'p2', cp:'10~12:1',cpct:45, nt:'정시 경쟁률 4.6:1 · 모집인원 13명', lv:'lv2a',sv:3.25},
+  {r:'cap',nm:'신한대학교',              lc:'경기 의정부', tp:'4년제',      fm:'교과·종합',      g9:'3.0~3.8',    g9c:'#0F6E56',gp:40,g5:'2등급 초반',      gc:'p2', cp:'10:1',   cpct:40, nt:'교과 비중 높음',                       lv:'lv2a',sv:3.4},
+  {r:'cap',nm:'안산대학교',              lc:'경기 안산',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.0~4.0',    g9c:'#0F6E56',gp:36,g5:'2등급 초~후반',   gc:'p2', cp:'보통',   cpct:40, nt:'지역 거점 전문대',                     lv:'lv2a',sv:3.5},
+  {r:'dg', nm:'대구과학대학교',          lc:'대구 북구',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.0~4.0',    g9c:'#0F6E56',gp:36,g5:'2등급 초~후반',   gc:'p2', cp:'보통',   cpct:40, nt:'대구 전문대 간호 상위권',             lv:'lv2a',sv:3.5},
+  {r:'dg', nm:'영남이공대학교',          lc:'대구 달서',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.0~4.0',    g9c:'#0F6E56',gp:36,g5:'2등급 초~후반',   gc:'p2', cp:'보통',   cpct:40, nt:'대구 소재 전문대',                     lv:'lv2a',sv:3.5},
+  {r:'dg', nm:'경일대학교',              lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'3.3~3.8',    g9c:'#0F6E56',gp:37,g5:'2등급 초·중반',   gc:'p2', cp:'10:1',   cpct:40, nt:'지역 중위권 · 취업 연계 강점',       lv:'lv2b',sv:3.55},
+  {r:'cap',nm:'한세대학교',              lc:'경기 군포',   tp:'4년제',      fm:'학생부교과',     g9:'3.5~4.0',    g9c:'#0F6E56',gp:38,g5:'2등급 후반',      gc:'p2', cp:'4.2:1',  cpct:17, nt:'낮은 경쟁률 · 안정 지원 가능',       lv:'lv2b',sv:3.75},
+  {r:'cap',nm:'대진대학교',              lc:'경기 포천',   tp:'4년제',      fm:'교과·종합',      g9:'3.5~4.0',    g9c:'#0F6E56',gp:38,g5:'2등급 후반',      gc:'p2', cp:'10~15:1',cpct:50, nt:'수능최저 없음',                         lv:'lv2b',sv:3.75},
+  {r:'cap',nm:'경민대학교',              lc:'경기 의정부', tp:'전문대(4년)',fm:'교과 100%',      g9:'3.5~4.5',    g9c:'#3B6D11',gp:45,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:40, nt:'교과 100% 선발',                       lv:'lv3', sv:4.0},
+  {r:'cap',nm:'수원과학대학교',          lc:'경기 화성',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.5~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'실습 중심 전문대',                     lv:'lv3', sv:4.0},
+  {r:'dg', nm:'가톨릭상지대학교',        lc:'경북 안동',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.5~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'안동 지역 거점 전문대',               lv:'lv3', sv:4.0},
+  {r:'dg', nm:'호산대학교',              lc:'경북 구미',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.5~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'구미 지역 거점',                       lv:'lv3', sv:4.0},
+  {r:'dg', nm:'위덕대학교',              lc:'경북 경주',   tp:'4년제',      fm:'교과·종합',      g9:'3.8~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'지역 거점 · 낮은 경쟁률',             lv:'lv3', sv:4.15},
+];
+NURSING.sort((a,b)=>a.sv-b.sv);
+
+// ──────── 기타 학과 데이터 ────────
+const HANDONG=[{
+  nm:'한동대학교', sub:'전학부 (자유전공)', lc:'경북 포항시 북구',
+  tp:'4년제 (무전공 입학)', fm:'교과전형 / 학생부종합 / 기독교지도자',
+  g9e:'교과 3.5~4.5등급 / 종합 3.0~4.0등급',
+  g9c:'#6A1B9A',gp:38,
+  g5:'2등급 중반~후반 (추정)',gc:'ppink',
+  cp:'교과 8:1 / 종합 12:1',cpct:48,
+  lv:'ot-a',
+  extra:[
+    '신입생 전원 무전공 입학 → 1학년 수료 후 전공 선택 (미국 리버럴아츠 방식)',
+    '교과전형 수능최저 적용 (국·수·영·탐 중 1개 3등급 이내)',
+    '종합전형 — 면접 있음, 기독교적 인재상 중요',
+    '2025학년도 교과전형 평균 3.77등급 / 70%컷 4.03등급',
+    '2025학년도 종합전형 평균 3.33등급 / 70%컷 3.65등급',
+    '5등급 환산 시 교과 2등급 후반 / 종합 2등급 중반 수준',
+  ]
+}];
+
+const CATHOLIC_SW=[{
+  nm:'가톨릭대학교 (성심교정)', sub:'사회복지학과', lc:'경기 부천시 지봉로 43',
+  tp:'4년제', fm:'지역균형(교과) / 잠재능력우수자 (종합) / 논술',
+  g9e:'교과(지역균형) 3.0~3.8등급 / 종합 3.5~4.5등급',
+  g9c:'#185FA5',gp:35,
+  g5:'2등급 초중반 (교과) / 2등급 후반 (종합)',gc:'p1b',
+  cp:'교과 8~10:1 / 종합·논술 20:1↑',cpct:55,
+  lv:'ot-b',
+  extra:[
+    '성심교정(부천)은 간호학과(성의교정·서초)와 다른 캠퍼스임에 유의',
+    '2025학년도 가톨릭대 전체 수시 평균 경쟁률 19.90:1',
+    '지역균형(교과)전형 경쟁률 8.66:1 — 상대적으로 안정적',
+    '논술전형 경쟁률 53.78:1 — 매우 높은 경쟁률',
+    '교과 기준: 국어·영어·수학·사회·과학·한국사 반영교과 평균등급',
+    '수능최저: 교과전형 국·수·영·탐 중 2개 등급 합 7 이내 (추정)',
+  ]
+}];
+
+// ──────── 렌더 헬퍼 ────────
+const NG=[
+  {label:'🥇 1등급 초반 (~1.5)',   style:'background:linear-gradient(135deg,#FFD700,#FFA500);color:#fff',min:0,  max:1.5},
+  {label:'🥈 1등급 초·중반 (1.5~2.0)',style:'background:#185FA5;color:#fff',                             min:1.5,max:2.0},
+  {label:'🥉 1등급 중반 (2.0~2.5)',style:'background:#534AB7;color:#fff',                                min:2.0,max:2.5},
+  {label:'📗 1등급 중~후반 (2.5~3.0)',style:'background:#0F6E56;color:#fff',                             min:2.5,max:3.0},
+  {label:'📘 1~2등급 후반 (3.0~3.5)',style:'background:#3B6D11;color:#fff',                              min:3.0,max:3.5},
+  {label:'📙 2등급 (3.5~4.0)',      style:'background:#854F0B;color:#fff',                                min:3.5,max:4.0},
+  {label:'📕 2~3등급 (4.0↑)',       style:'background:#A32D2D;color:#fff',                                min:4.0,max:99},
+];
+function tpB(t){
+  if(t.includes('국립'))   return`<span class="bd bnat">${t}</span>`;
+  if(t.includes('전문대')) return`<span class="bd bjr">${t}</span>`;
+  if(t.includes('간호전문'))return`<span class="bd bsp">${t}</span>`;
+  return`<span class="bd b4">${t}</span>`;
+}
+function rgB(r){
+  return r==='cap'?`<span class="bd rg-cap">🏙️ 수도권</span>`:`<span class="bd rg-dg">🏔️ 대구·경북</span>`;
+}
+function ccC(v){
+  const n=parseFloat(v);
+  if(v.includes('↑')||n>=25) return'var(--red)';
+  if(n>=15) return'var(--purple)';
+  if(n<=5)  return'var(--green)';
+  return'var(--text)';
+}
+function rkEl(i){
+  const c=i===1?'rk-gold':i===2?'rk-silv':i===3?'rk-bron':'rk-norm';
+  return`<div class="card-rank ${c}">${i}</div>`;
+}
+// 간호 카드
+function nCard(d,rank){
+  return`<div class="card ${d.lv}${d.r==='dg'?' dg':''}">
+    <div class="card-head">${rkEl(rank)}<div class="card-nc"><div class="card-name">${d.nm}</div><div class="card-loc">${d.lc}</div></div></div>
+    <div class="cbadges">${rgB(d.r)}${tpB(d.tp)}<span class="bd" style="background:#f0f0eb;color:var(--muted)">${d.fm}</span></div>
+    <div class="cstats">
+      <div class="sbox"><div class="slabel">9등급 등급컷</div><div class="sval" style="color:${d.g9c};font-size:11px">${d.g9}</div><div class="gbar"><div class="gbarf" style="width:${d.gp}%;background:${d.g9c}"></div></div></div>
+      <div class="sbox"><div class="slabel">5등급 환산</div><div style="margin-top:2px"><span class="gp ${d.gc}" style="font-size:9px">${d.g5}</span></div></div>
+      <div class="sbox"><div class="slabel">경쟁률</div><div class="sval" style="color:${ccC(d.cp)}">${d.cp}</div></div>
+    </div>
+    <div class="cnote">${d.nt}</div>
+  </div>`;
+}
+// 기타 카드 (확장 정보)
+function otCard(d){
+  return`<div class="card ${d.lv}">
+    <div class="card-head">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📚</div>
+      <div class="card-nc">
+        <div class="card-name">${d.nm}</div>
+        <div style="font-size:12px;font-weight:600;color:var(--purple);margin-top:2px">${d.sub}</div>
+        <div class="card-loc">${d.lc}</div>
+      </div>
+    </div>
+    <div class="cbadges">
+      ${tpB(d.tp)}
+      <span class="bd" style="background:#f3e5f5;color:#6A1B9A">${d.fm}</span>
+    </div>
+    <div class="cstats">
+      <div class="sbox" style="grid-column:1/3">
+        <div class="slabel">9등급 교과 등급컷</div>
+        <div class="sval" style="color:${d.g9c};font-size:11px;white-space:normal">${d.g9e}</div>
+        <div class="gbar" style="margin-top:5px"><div class="gbarf" style="width:${d.gp}%;background:${d.g9c}"></div></div>
+      </div>
+      <div class="sbox">
+        <div class="slabel">경쟁률</div>
+        <div class="sval" style="color:${ccC(d.cp)};font-size:11px;white-space:normal">${d.cp}</div>
+      </div>
+    </div>
+    <div class="sbox" style="margin-bottom:8px">
+      <div class="slabel">5등급 환산 (예상)</div>
+      <div style="margin-top:3px"><span class="gp ${d.gc}">${d.g5}</span></div>
+    </div>
+    <div style="background:#fafaf8;border-radius:7px;padding:8px 10px;border:1px solid var(--border)">
+      <div style="font-size:9px;color:var(--hint);font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-bottom:5px">📌 핵심 정보</div>
+      ${d.extra.map(e=>`<div style="font-size:11px;color:var(--muted);line-height:1.65;padding-left:10px;position:relative"><span style="position:absolute;left:0">·</span>${e}</div>`).join('')}
+    </div>
+  </div>`;
+}
+
+// ──────── 간호학과 탭 빌드 ────────
+const rankMap=new Map(NURSING.map((d,i)=>[d,i+1]));
+// 국군간호사관학교 특수 카드
+const KNMC_HTML=`<div class="sh"><span class="sh-badge" style="background:linear-gradient(135deg,#1a237e,#3949ab);color:#fff">🎖️ 특수기관 — 국군간호사관학교 (수시·정시 중복지원 가능)</span><div class="sh-line"></div></div>
+<div class="cgrid"><div class="card knmc-card">
+  <div class="card-head">
+    <div style="width:28px;height:28px;border-radius:50%;background:#1a237e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🎖️</div>
+    <div class="card-nc"><div class="card-name" style="color:#1a237e">국군간호사관학교 🎖️</div><div class="card-loc">대전 유성구 자운대 | 국방부 직할 · 4년 전액 국비</div></div>
+    <span class="bd" style="background:#1a237e;color:#fff;flex-shrink:0">특수대학</span>
+  </div>
+  <div class="cbadges"><span class="bd" style="background:#e8eaf6;color:#1a237e">총 90명 (남14·여76)</span><span class="bd" style="background:#fff3e0;color:#e65100">수시·정시 중복지원 가능</span></div>
+  <div class="cstats">
+    <div class="sbox"><div class="slabel">9등급 (추정·비공개)</div><div class="sval" style="color:#1a237e;font-size:11px">1.5~2.5등급</div><div class="gbar"><div class="gbarf" style="width:20%;background:#1a237e"></div></div></div>
+    <div class="sbox"><div class="slabel">5등급 환산</div><div style="margin-top:2px"><span class="gp p1a" style="font-size:9px">1등급 초·중반</span></div></div>
+    <div class="sbox"><div class="slabel">경쟁률</div><div class="sval" style="color:var(--red)">30~50:1</div></div>
+  </div>
+  <div style="background:rgba(255,255,255,.75);border-radius:7px;padding:7px 10px;border:1px solid #c5cae9">
+    <div style="font-size:9px;color:var(--hint);font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-bottom:4px">전형 절차</div>
+    <div style="font-size:11px;color:#283593;font-weight:500;line-height:1.65">① 1차: 공동시험(국·수·영) → ② 2차: 신체·체력·면접 → ③ 우선선발(내신) → ④ 종합선발(수능반영)</div>
+  </div>
+  <div class="cnote">수시 6·정시 3회 제한 예외 · 전액 국비 · 졸업 후 간호장교(소위) 임관 → 의무복무 7년 · 등급컷 비공개</div>
+</div></div>`;
+
+(function buildNursing(){
+  const el=document.getElementById('tab-nursing');
+  let html=KNMC_HTML;
+  NG.forEach(g=>{
+    const items=NURSING.filter(d=>d.sv>=g.min&&d.sv<g.max);
+    if(!items.length) return;
+    html+=`<div class="sh"><span class="sh-badge" style="${g.style}">${g.label}</span><span class="sh-cnt">${items.length}개교</span><div class="sh-line"></div></div>
+    <div class="cgrid">${items.map(d=>nCard(d,rankMap.get(d))).join('')}</div>`;
+  });
+  el.innerHTML=html;
+})();
+
+// ──────── 기타학과 탭 빌드 ────────
+(function buildOther(){
+  document.getElementById('cgrid-handong').innerHTML=HANDONG.map(otCard).join('');
+  document.getElementById('cgrid-catholic').innerHTML=CATHOLIC_SW.map(otCard).join('');
+})();
+
+// ──────── 탭 전환 ────────
+function switchTab(btn,name){
+  document.querySelectorAll('.bnav-btn,.dtab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll(`[data-target="${name}"]`).forEach(b=>b.classList.add('on'));
+  document.getElementById('tab-'+name).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
