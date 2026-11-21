@@ -98,6 +98,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 .bpink{background:var(--pink-bg);color:var(--pink)}
 .rg-cap{background:var(--blue-bg);color:var(--blue)}
 .rg-dg{background:var(--orange-bg);color:var(--orange)}
+.dt{margin-top:8px;border-top:1px dashed #d8d8d0;padding-top:6px}
+.dt summary{cursor:pointer;font-size:12px;font-weight:600;color:var(--purple);list-style:none;padding:4px 0}
+.dt summary::-webkit-details-marker{display:none}
+.dt[open] summary{margin-bottom:4px}
+.dt-row{font-size:11.5px;line-height:1.6;color:var(--text);padding:3px 0}
+.dt-row b{display:block;font-size:10px;color:var(--muted);font-weight:600}
+.sl{color:inherit;text-decoration:none;border-bottom:1px dashed currentColor}.sl:hover{color:var(--purple)}
+.fav{margin-left:auto;background:none;border:0;font-size:22px;line-height:1;color:#c9a100;cursor:pointer;padding:4px 6px;flex-shrink:0}
+.fav.on{color:#e0a800}
+.fav-empty{font-size:12px;color:var(--hint);padding:6px 4px 12px}
+.cut{width:100%;border-collapse:collapse;font-size:11px;margin-top:3px}.cut th,.cut td{border-bottom:1px solid #e5e5de;padding:3px 4px;text-align:left}.cut th{color:var(--muted);font-weight:600}
+.dt-foot{font-size:10px;color:var(--hint);margin-top:4px}
+.rg-us{background:#E6F1FB;color:#185FA5}
 .rg-gyb{background:#F3E5F5;color:#6A1B9A}
 
 /* 스탯 박스 */
@@ -149,14 +162,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:14
 <!-- 데스크톱 탭 -->
 <div class="wrap" style="padding-bottom:0">
   <div class="desk-tabs">
-    <button class="dtab on"  data-target="nursing" onclick="switchTab(this,'nursing')">🏥 간호학과 (42개교)</button>
+    <button class="dtab on"  data-target="nursing" onclick="switchTab(this,'nursing')">🏥 간호학과 (39개교)</button>
     <button class="dtab"     data-target="other"   onclick="switchTab(this,'other')">📚 기타 관심학과 (2개교)</button>
   </div>
 </div>
 
 <div class="wrap">
   <div class="alert">
-    <strong>⚠️ 참고:</strong> 아래 등급컷은 <strong>2025학년도 기반 추정치</strong>입니다. 반드시 각 대학 입학처 공식 발표를 최종 확인하세요.
+    <strong>⚠️ 참고:</strong> 아래 등급컷은 대부분 <strong>2025학년도 기반 추정치</strong>이며, <strong>10개교만 2026학년도 실측(50%·70%컷, 카드 펼침 시 표시)</strong>입니다. 반드시 각 대학 입학처 공식 발표를 최종 확인하세요.
   </div>
 
   <!-- 간호학과 탭 -->
@@ -211,16 +224,16 @@ const NURSING=[
   {r:'cap',nm:'중앙대학교 ⭐',           lc:'서울 동작',   tp:'4년제',      fm:'교과·종합·논술', g9:'1.8~2.3',    g9c:'#185FA5',gp:22,g5:'1등급 초·중반',   gc:'p1a',cp:'20~22:1',cpct:85, nt:'교과 27명 최다 · 중앙대병원',         lv:'lv1c',sv:2.05},
   {r:'cap',nm:'경희대학교 ⭐',           lc:'서울 동대문', tp:'4년제',      fm:'교과·종합·논술', g9:'1.8~2.5',    g9c:'#534AB7',gp:23,g5:'1등급 중~후반',   gc:'p1b',cp:'18:1',   cpct:72, nt:'경희의료원 연계',                       lv:'lv1c',sv:2.15},
   {r:'cap',nm:'아주대학교 ⭐',           lc:'경기 수원',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.3',    g9c:'#185FA5',gp:23,g5:'1등급 중반',      gc:'p1a',cp:'15:1',   cpct:60, nt:'교과 7명 소수 · 아주대병원',           lv:'lv1c',sv:2.15},
-  {r:'cap',nm:'을지대학교(의정부) ⭐',   lc:'경기 의정부', tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'20:1',   cpct:80, nt:'을지병원 연계 실습',                   lv:'lv1c',sv:2.25},
+  {r:'cap',nm:'을지대학교(의정부) ⭐',   lc:'경기 의정부', tp:'4년제',      fm:'교과·종합',      g9:'4.15~5.30',  g9c:'#3B6D11',gp:50,g5:'2등급 후반~3등급',gc:'p3', cp:'5.2~6.1:1',cpct:40, nt:'2026 정시 일반전형Ⅰ 학생부 50%컷 5.30 / 70%컷 4.15 (수시 컷은 수집 전) · 의정부을지대병원 연계',lv:'lv3',sv:4.2},
+  {r:'cap',nm:'을지대학교(성남) ⭐',     lc:'경기 성남',   tp:'4년제',      fm:'교과·종합',      g9:'2.30~2.45',  g9c:'#185FA5',gp:24,g5:'1등급 중반',      gc:'p1a',cp:'5.8~5.9:1',cpct:55, nt:'2026 정시 일반전형Ⅰ 학생부 50%컷 2.45 / 70%컷 2.30 (캠퍼스 미표기 행을 성남으로 추정 · 확인 필요) · 수시 컷은 수집 전',lv:'lv1c',sv:2.4},
   {r:'cap',nm:'가천대(메디컬) ⭐',       lc:'인천 연수',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'23.8:1', cpct:95, nt:'교과 28명 최다 모집',                   lv:'lv1c',sv:2.25},
   {r:'cap',nm:'인하대학교 ⭐',           lc:'인천 미추홀', tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'18:1',   cpct:72, nt:'인하대병원 · 교과 17명',               lv:'lv1c',sv:2.25},
   {r:'cap',nm:'차의과학대학교 ⭐',       lc:'경기 포천',   tp:'4년제',      fm:'학생부종합',     g9:'2.0~2.5',    g9c:'#534AB7',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'높음',   cpct:70, nt:'CHA병원 연계 · 종합전형 강세',       lv:'lv1c',sv:2.25},
-  {r:'cap',nm:'삼육보건대학교',          lc:'서울 노원',   tp:'전문대(4년)',fm:'학생부교과',     g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'높음',   cpct:75, nt:'서울 전문대 최상위권',                 lv:'lv1c',sv:2.25},
   {r:'dg', nm:'계명대학교 ⭐',           lc:'대구 달서',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'20:1',   cpct:80, nt:'계명대동산병원 연계',                   lv:'lv1c',sv:2.25},
   {r:'dg', nm:'동국대학교 WISE ⭐',      lc:'경북 경주',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~2.5',    g9c:'#185FA5',gp:25,g5:'1등급 중반',      gc:'p1a',cp:'15~20:1',cpct:78, nt:'일산병원 원거리실습 · 기숙사 지원',  lv:'lv1c',sv:2.25},
+  {r:'us', nm:'울산대학교 ⭐',           lc:'울산 남구',   tp:'4년제',      fm:'교과·종합',      g9:'2.0~3.4',    g9c:'#534AB7',gp:30,g5:'1등급 후반~2등급 초반',gc:'p1b',cp:'3.6~8.8:1',cpct:60, nt:'지역교과 70%컷 2.06 · 일반교과 3.37 · 잠재역량 1.96(50%컷 2.64, 컷 역전 주의) · 정시 나군 2.46:1 · 수능최저 수학포함 2합7 · 지역교과는 부울경 고교 · 울산대병원·서울아산병원 연계',lv:'lv1d',sv:2.4},
   {r:'dg', nm:'대구가톨릭대학교 ⭐',     lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'2.3~2.8',    g9c:'#534AB7',gp:28,g5:'1등급 중~후반',   gc:'p1b',cp:'15:1',   cpct:60, nt:'대구가톨릭대병원 · 42명 모집',       lv:'lv1d',sv:2.55},
   {r:'dg', nm:'영남대학교 ⭐',           lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'2.3~2.8',    g9c:'#534AB7',gp:28,g5:'1등급 중~후반',   gc:'p1b',cp:'15:1',   cpct:60, nt:'영남대병원 · 지역인재 강세',           lv:'lv1d',sv:2.55},
-  {r:'cap',nm:'삼육대학교',              lc:'서울 노원',   tp:'4년제',      fm:'교과·종합',      g9:'2.5~3.0',    g9c:'#534AB7',gp:30,g5:'1등급 후반',      gc:'p1b',cp:'20:1↑',  cpct:80, nt:'국가고시 합격률 최우수권',             lv:'lv1d',sv:2.75},
   {r:'cap',nm:'서일대학교',              lc:'서울 중랑',   tp:'전문대(4년)',fm:'학생부교과',     g9:'2.5~3.0',    g9c:'#534AB7',gp:30,g5:'1등급 후반',      gc:'p1b',cp:'높음',   cpct:65, nt:'서울권 전문대',                         lv:'lv1d',sv:2.75},
   {r:'dg', nm:'국립경국대(구 안동대) ⭐',lc:'경북 안동',   tp:'국립 4년제', fm:'교과·종합',      g9:'2.5~3.0',    g9c:'#534AB7',gp:30,g5:'1등급 후반',      gc:'p1b',cp:'12:1',   cpct:48, nt:'국립대 혜택 · 지역인재 비중 높음',   lv:'lv1d',sv:2.75},
   {r:'dg', nm:'대구한의대학교',          lc:'경북 경산',   tp:'4년제',      fm:'교과·종합',      g9:'2.8~3.3',    g9c:'#0F6E56',gp:32,g5:'1등급 후반~2등급',gc:'p2', cp:'12:1',   cpct:48, nt:'한의대 부설 병원 연계',                 lv:'lv2a',sv:3.05},
@@ -238,9 +251,6 @@ const NURSING=[
   {r:'cap',nm:'대진대학교',              lc:'경기 포천',   tp:'4년제',      fm:'교과·종합',      g9:'3.5~4.0',    g9c:'#0F6E56',gp:38,g5:'2등급 후반',      gc:'p2', cp:'10~15:1',cpct:50, nt:'수능최저 없음',                         lv:'lv2b',sv:3.75},
   {r:'cap',nm:'경민대학교',              lc:'경기 의정부', tp:'전문대(4년)',fm:'교과 100%',      g9:'3.5~4.5',    g9c:'#3B6D11',gp:45,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:40, nt:'교과 100% 선발',                       lv:'lv3', sv:4.0},
   {r:'cap',nm:'수원과학대학교',          lc:'경기 화성',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.5~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'실습 중심 전문대',                     lv:'lv3', sv:4.0},
-  {r:'dg', nm:'가톨릭상지대학교',        lc:'경북 안동',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.5~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'안동 지역 거점 전문대',               lv:'lv3', sv:4.0},
-  {r:'dg', nm:'호산대학교',              lc:'경북 구미',   tp:'전문대(4년)',fm:'학생부교과',     g9:'3.5~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'구미 지역 거점',                       lv:'lv3', sv:4.0},
-  {r:'dg', nm:'위덕대학교',              lc:'경북 경주',   tp:'4년제',      fm:'교과·종합',      g9:'3.8~4.5',    g9c:'#3B6D11',gp:42,g5:'2등급 후반~3등급',gc:'p3', cp:'보통',   cpct:35, nt:'지역 거점 · 낮은 경쟁률',             lv:'lv3', sv:4.15},
 ];
 NURSING.sort((a,b)=>a.sv-b.sv);
 
@@ -298,7 +308,7 @@ function tpB(t){
   return`<span class="bd b4">${t}</span>`;
 }
 function rgB(r){
-  return r==='cap'?`<span class="bd rg-cap">🏙️ 수도권</span>`:`<span class="bd rg-dg">🏔️ 대구·경북</span>`;
+  return r==='us'?`<span class="bd rg-us">🌊 울산</span>`:r==='cap'?`<span class="bd rg-cap">🏙️ 수도권</span>`:`<span class="bd rg-dg">🏔️ 대구·경북</span>`;
 }
 function ccC(v){
   const n=parseFloat(v);
@@ -311,10 +321,26 @@ function rkEl(i){
   const c=i===1?'rk-gold':i===2?'rk-silv':i===3?'rk-bron':'rk-norm';
   return`<div class="card-rank ${c}">${i}</div>`;
 }
+// 공유 저장소(구글 시트 Apps Script 웹앱 주소). 비워두면 이 기기 브라우저에만 저장됩니다.
+const FAV_API='https://script.google.com/macros/s/AKfycbx53joiu-8-CIQJR4GT_HW5sUJwje5oktipsxM18k2d27M1iVfx8u1YMVs5mQ-q7xWt/exec';
+let FAV=new Set();
+try{FAV=new Set(JSON.parse(localStorage.getItem('juha_fav')||'[]'))}catch(e){}
+if(FAV_API){fetch(FAV_API).then(r=>r.json()).then(j=>{if(Array.isArray(j.fav)){FAV=new Set(j.fav);try{localStorage.setItem('juha_fav',JSON.stringify(j.fav))}catch(e){}buildNursing()}}).catch(()=>{});}
+function togFav(i){
+  const n=NURSING[i].nm;
+  FAV.has(n)?FAV.delete(n):FAV.add(n);
+  try{localStorage.setItem('juha_fav',JSON.stringify([...FAV]))}catch(e){}
+  if(FAV_API){fetch(FAV_API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fav:[...FAV]})}).catch(()=>{});}
+  buildNursing();
+}
+function schoolLink(nm,suffix){
+  const q=encodeURIComponent(detKey(nm).replace(/\(.*?\)/g,'')+' '+(suffix||'간호학과'));
+  return`<a class="sl" href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener noreferrer" title="새 창에서 ${detKey(nm)} ${suffix||'간호학과'} 검색">${nm}</a>`;
+}
 // 간호 카드
 function nCard(d,rank){
   return`<div class="card ${d.lv}${d.r==='dg'?' dg':''}">
-    <div class="card-head">${rkEl(rank)}<div class="card-nc"><div class="card-name">${d.nm}</div><div class="card-loc">${d.lc}</div></div></div>
+    <div class="card-head">${rkEl(rank)}<div class="card-nc"><div class="card-name">${schoolLink(d.nm)}</div><div class="card-loc">${d.lc}</div></div><button class="fav${FAV.has(d.nm)?' on':''}" onclick="togFav(${NURSING.indexOf(d)})" aria-label="관심 학교 선택">${FAV.has(d.nm)?'★':'☆'}</button></div>
     <div class="cbadges">${rgB(d.r)}${tpB(d.tp)}<span class="bd" style="background:#f0f0eb;color:var(--muted)">${d.fm}</span></div>
     <div class="cstats">
       <div class="sbox"><div class="slabel">9등급 등급컷</div><div class="sval" style="color:${d.g9c};font-size:11px">${d.g9}</div><div class="gbar"><div class="gbarf" style="width:${d.gp}%;background:${d.g9c}"></div></div></div>
@@ -322,6 +348,7 @@ function nCard(d,rank){
       <div class="sbox"><div class="slabel">경쟁률</div><div class="sval" style="color:${ccC(d.cp)}">${d.cp}</div></div>
     </div>
     <div class="cnote">${d.nt}</div>
+    <details class="dt"><summary>ℹ️ 학교·간호학과 소개 / 가는 길</summary>${detBox(d.nm)}</details>
   </div>`;
 }
 // 기타 카드 (확장 정보)
@@ -330,7 +357,7 @@ function otCard(d){
     <div class="card-head">
       <div style="width:28px;height:28px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">📚</div>
       <div class="card-nc">
-        <div class="card-name">${d.nm}</div>
+        <div class="card-name">${schoolLink(d.nm,d.sub)}</div>
         <div style="font-size:12px;font-weight:600;color:var(--purple);margin-top:2px">${d.sub}</div>
         <div class="card-loc">${d.lc}</div>
       </div>
@@ -358,7 +385,73 @@ function otCard(d){
       <div style="font-size:9px;color:var(--hint);font-weight:600;letter-spacing:.3px;text-transform:uppercase;margin-bottom:5px">📌 핵심 정보</div>
       ${d.extra.map(e=>`<div style="font-size:11px;color:var(--muted);line-height:1.65;padding-left:10px;position:relative"><span style="position:absolute;left:0">·</span>${e}</div>`).join('')}
     </div>
+    <details class="dt"><summary>ℹ️ 학교·간호학과 소개 / 가는 길</summary>${detBox(d.nm)}</details>
   </div>`;
+}
+
+// ──────── 학교·간호학과 상세 (행신동 기준 거리·교통은 대략치, 출발 전 지도앱으로 재확인) ────────
+const DETAIL={
+'서울대학교':{d:'약 35km',t:'1시간 20분~1시간 40분',r:'경의중앙선 → 지하철 2호선(서울대입구역) → 버스/마을버스',s:'국내 최상위 국립 종합대학. 관악캠퍼스 중심.',n:'독립 단과대학인 간호대학. 서울대병원 계열 임상실습, 연구·리더십 중심 교육.'},
+'연세대학교':{d:'약 17km',t:'45분~1시간',r:'경의중앙선(신촌역) 또는 버스 → 도보',s:'서울 신촌 소재 사립 종합대학. 세브란스 의료기관과 연계.',n:'간호대학(독립 단과). 세브란스병원 임상실습, 대학원·연구 연계가 강점.'},
+'고려대학교':{d:'약 22km',t:'1시간~1시간 15분',r:'경의중앙선 → 공덕 환승 → 6호선(고려대·안암역)',s:'서울 성북 안암 소재 사립 종합대학.',n:'간호대학(독립 단과). 고려대 안암·구로·안산병원 실습 연계.'},
+'가톨릭대학교':{d:'약 30km',t:'1시간 15분~1시간 30분',r:'경의중앙선 → 지하철 환승(9호선 고속터미널 등) → 도보/버스',s:'가톨릭 계열 사립대. 서울(성의교정, 서초) 의생명 캠퍼스에 간호대학.',n:'간호대학. 가톨릭중앙의료원(서울성모 등 8개 병원) 실습 네트워크.'},
+'한양대학교':{d:'약 28km',t:'1시간~1시간 10분',r:'경의중앙선(왕십리) → 2호선(한양대역)',s:'서울 성동 소재 사립 종합대학. 공학 강세.',n:'간호학과. 한양대병원 실습. 교과전형 소수 선발.'},
+'서울여자간호대학교':{d:'약 25km',t:'1시간 10분~1시간 30분',r:'경의중앙선 → 지하철 환승 → 버스',s:'간호 단일 계열 특성화 대학(여대).',n:'간호학 전문교육. 졸업생 병원 취업 연계 강점. (위치·교통은 입학처에서 재확인)'},
+'경북대학교':{d:'약 300km',t:'약 3시간 30분~4시간',r:'서울역/용산 이동 → KTX → 동대구역 → 지하철/버스',s:'대구 소재 거점 국립대. 지역 최상위권.',n:'간호대학. 정원 전국 최다 규모. 경북대병원 실습.'},
+'이화여자대학교':{d:'약 17km',t:'50분~1시간',r:'경의중앙선(가좌) → 2호선 환승(이대역) 또는 버스',s:'서울 서대문 소재 사립 여자 종합대학.',n:'간호대학(독립 단과). 이대서울·목동병원 실습.'},
+'중앙대학교':{d:'약 30km',t:'1시간 15분~1시간 30분',r:'경의중앙선 → 공덕 → 지하철 환승(9호선 흑석 등) → 도보/버스',s:'서울 동작 소재 사립 종합대학(서울캠).',n:'간호학과(적십자간호대학). 중앙대병원 실습.'},
+'경희대학교':{d:'약 28km',t:'1시간~1시간 20분',r:'경의중앙선 → 지하철/버스 환승(회기역 인근)',s:'서울 동대문 소재 사립 종합대학.',n:'간호과학대학. 경희의료원 실습.'},
+'아주대학교':{d:'약 55km',t:'1시간 40분~2시간',r:'경의중앙선 → 지하철 환승 → 광역버스/버스(수원)',s:'수원 소재 사립 종합대학. 의대·공대 강세.',n:'간호대학. 아주대병원 실습(권역외상센터 등).'},
+'을지대학교(성남)':{d:'약 45km',t:'1시간 30분~1시간 50분',r:'경의중앙선 → 지하철 환승(8호선 산성역 방면) → 도보/버스',s:'성남 수정구 소재 을지대 성남캠퍼스. 보건의료 특화.',n:'간호학과. 성남캠퍼스 간호학과 (위치·교통은 입학처에서 재확인)'},
+'을지대학교(의정부)':{d:'약 25km',t:'1시간~1시간 20분',r:'경의중앙선 → 1호선 환승(의정부) → 버스/도보',s:'의정부 캠퍼스는 의정부을지대병원과 인접. 보건의료 특화.',n:'간호학과. 병원 인접 실습 환경. (성남 캠퍼스 별도)'},
+'가천대(메디컬)':{d:'약 60km',t:'1시간 40분~2시간',r:'지하철 환승 다수(수인분당/성남) 또는 광역버스',s:'메디컬캠퍼스(인천 연수). 길병원 인접.',n:'간호대학. 가천대 길병원 실습. 교과 모집 인원 많음.'},
+'인하대학교':{d:'약 55km',t:'1시간 30분~1시간 50분',r:'경의중앙선·공항철도 등 환승 → 인천 1호선 → 버스',s:'인천 미추홀 소재 사립 종합대학.',n:'간호학과. 인하대병원 실습.'},
+'차의과학대학교':{d:'약 60km',t:'1시간 40분~2시간',r:'광역버스·버스 환승(포천 방면)',s:'포천 소재 사립대. 차병원 계열.',n:'간호학과. CHA 병원 네트워크 실습.'},
+'계명대학교':{d:'약 300km',t:'약 3시간 30분~4시간',r:'서울역 → KTX → 동대구역 → 지하철 3호선/버스',s:'대구 달서 소재 사립 종합대학.',n:'간호대학. 계명대 동산병원 실습.'},
+'동국대학교 WISE':{d:'약 320km',t:'약 4시간~4시간 30분',r:'서울역 → KTX(신경주역) → 버스',s:'경주 소재 동국대 WISE 캠퍼스.',n:'간호학과. 원거리 실습병원 연계, 기숙사 지원.'},
+'울산대학교':{d:'약 380km',t:'약 4시간 30분~5시간',r:'서울역 → KTX(울산역) → 버스',s:'울산 남구 소재 사립대. 현대 계열 지원.',n:'간호학과. 울산대병원·서울아산병원 연계 실습.'},
+'대구가톨릭대학교':{d:'약 310km',t:'약 4시간',r:'서울역 → KTX(동대구) → 지하철 → 버스',s:'경북 경산 소재 가톨릭 계열 대학.',n:'간호대학. 대구가톨릭대병원 실습.'},
+'영남대학교':{d:'약 310km',t:'약 4시간',r:'서울역 → KTX(동대구) → 지하철 → 버스',s:'경북 경산 소재 사립 종합대학.',n:'간호대학. 영남대병원 실습.'},
+'서일대학교':{d:'약 28km',t:'1시간~1시간 20분',r:'경의중앙선 → 지하철 환승 → 버스(중랑)',s:'서울 중랑 소재 전문대.',n:'간호학과(4년제 과정). 서울권 전문대 간호.'},
+'국립경국대(구 안동대)':{d:'약 230km',t:'약 3시간 30분',r:'청량리 → 중앙선 KTX → 안동역 → 버스',s:'안동 소재 국립대(안동대 개편).',n:'간호학과. 국립대 혜택, 지역인재 비중 높음.'},
+'대구한의대학교':{d:'약 310km',t:'약 4시간',r:'서울역 → KTX(동대구) → 지하철/버스',s:'경산 소재 한의 계열 특성화 대학.',n:'간호학과. 부설 병원 연계.'},
+'대구보건대학교':{d:'약 300km',t:'약 3시간 40분',r:'서울역 → KTX(동대구) → 지하철/버스',s:'대구 동구 소재 보건계열 전문대.',n:'간호학과(4년제 과정). 취업 연계 강점.'},
+'수원대학교':{d:'약 55km',t:'1시간 40분~2시간',r:'경의중앙선 → 지하철 환승 → 버스(화성)',s:'화성 소재 사립 종합대학.',n:'간호학과. 지역병원 실습.'},
+'성결대학교':{d:'약 50km',t:'1시간 30분~1시간 50분',r:'경의중앙선 → 지하철(1·4호선) 환승 → 도보',s:'안양 소재 기독교 계열 사립대.',n:'간호학과. 안양 인근 병원 실습.'},
+'수원여자대학교':{d:'약 55km',t:'1시간 40분~2시간',r:'경의중앙선 → 지하철 환승 → 버스',s:'수원 소재 여자 전문대.',n:'간호학과(4년제 과정).'},
+'대구대학교':{d:'약 310km',t:'약 4시간',r:'서울역 → KTX(동대구) → 지하철 → 버스',s:'경산 소재 사립 종합대학.',n:'간호학과. 정시 경쟁률 높은 편.'},
+'신한대학교':{d:'약 25km',t:'1시간~1시간 20분',r:'경의중앙선 → 1호선 환승(의정부) → 버스',s:'의정부 소재 사립대.',n:'간호학과. 교과 비중 높음.'},
+'안산대학교':{d:'약 55km',t:'1시간 40분~2시간',r:'경의중앙선 → 지하철 4호선 환승 → 버스',s:'안산 소재 전문대.',n:'간호학과(4년제 과정).'},
+'대구과학대학교':{d:'약 300km',t:'약 3시간 40분',r:'서울역 → KTX(동대구) → 지하철/버스',s:'대구 북구 소재 전문대.',n:'간호학과(4년제 과정).'},
+'영남이공대학교':{d:'약 300km',t:'약 3시간 40분',r:'서울역 → KTX(동대구) → 지하철/버스',s:'대구 소재 전문대.',n:'간호학과(4년제 과정).'},
+'경일대학교':{d:'약 310km',t:'약 4시간',r:'서울역 → KTX(동대구) → 지하철/버스',s:'경산 소재 사립대.',n:'간호학과. 지역 취업 연계.'},
+'한세대학교':{d:'약 50km',t:'1시간 30분~1시간 50분',r:'경의중앙선 → 지하철 4호선(군포 방면) 환승 → 버스',s:'군포 소재 기독교 계열 사립대.',n:'간호학과. 비교적 낮은 경쟁률.'},
+'대진대학교':{d:'약 60km',t:'1시간 40분~2시간',r:'경의중앙선 → 1호선 환승 → 광역버스(포천)',s:'포천 소재 사립 종합대학.',n:'간호학과. 수능최저 없음 전형 위주.'},
+'경민대학교':{d:'약 25km',t:'1시간~1시간 20분',r:'경의중앙선 → 1호선 환승(의정부) → 도보/버스',s:'의정부 소재 전문대.',n:'간호학과(4년제 과정). 교과 100%.'},
+'수원과학대학교':{d:'약 60km',t:'1시간 50분~2시간 10분',r:'경의중앙선 → 지하철 환승 → 버스(화성)',s:'화성 소재 전문대.',n:'간호학과(4년제 과정). 실습 중심.'},
+'국군간호사관학교':{d:'약 170km',t:'약 2시간 30분',r:'서울역 → KTX(대전역) → 버스/택시(자운대)',s:'국방부 직할 사관학교. 4년 전액 국비.',n:'졸업 후 간호장교 임관, 의무복무.'},
+'한동대학교':{d:'약 330km',t:'약 4시간 30분',r:'서울역 → KTX(포항역) → 버스',s:'포항 소재 기독교 계열 사립대. 소규모 글로벌 교육.',n:'자유전공(비간호). 학부 단위 모집.'},
+'가톨릭대학교 (성심교정)':{d:'약 30km',t:'1시간~1시간 20분',r:'경의중앙선 → 지하철 1호선(역곡역) → 도보/버스',s:'경기 부천 소재 성심교정.',n:'사회복지학과(비간호).'}
+};
+function detKey(nm){return nm.replace(/\s*⭐/g,'').replace(/\s*🎖️/g,'').trim();}
+const HOSP={"서울대학교": "서울대학교병원", "연세대학교": "세브란스병원(신촌), 강남세브란스병원", "고려대학교": "고려대 안암병원·구로병원·안산병원", "가톨릭대학교": "서울성모병원 등 가톨릭중앙의료원(여의도·은평·의정부·부천·인천성모 등)", "한양대학교": "한양대학교병원, 한양대구리병원", "경북대학교": "경북대학교병원, 칠곡경북대학교병원", "이화여자대학교": "이대서울병원, 이대목동병원", "중앙대학교": "중앙대학교병원, 중앙대광명병원", "경희대학교": "경희대학교병원, 강동경희대학교병원", "아주대학교": "아주대학교병원", "을지대학교(의정부)": "의정부을지대학교병원", "가천대(메디컬)": "가천대 길병원", "인하대학교": "인하대학교병원", "차의과학대학교": "분당차병원 등 CHA 의료원", "계명대학교": "계명대 동산병원", "동국대학교 WISE": "동국대학교 경주병원(원거리 실습: 일산병원)", "울산대학교": "울산대학교병원, 서울아산병원(연계)", "대구가톨릭대학교": "대구가톨릭대학교병원", "영남대학교": "영남대학교병원", "대구한의대학교": "대구한의대 대구한방병원(부속 한방병원)", "국군간호사관학교": "국군대전병원 등 군 병원"};
+const DB=[{"school": "서울대학교", "year": 2026, "track": "일반전형", "quota": 27, "comp": 10.96, "c50": 1.79, "c70": 2.01, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "서울대학교", "year": 2026, "track": "지역균형", "quota": 10, "comp": 8.4, "c50": 1.35, "c70": 1.35, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "연세대학교", "year": 2026, "track": "학생부종합(활동우수형)", "quota": 24, "comp": 8.13, "c50": 1.74, "c70": 1.87, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "연세대학교", "year": 2026, "track": "학생부교과(추천형)", "quota": 10, "comp": 6.8, "c50": 1.37, "c70": 1.39, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "고려대학교", "year": 2026, "track": "학생부종합(계열적합)", "quota": 7, "comp": 12.71, "c50": 1.82, "c70": 2.13, "src": "hakjum.school(어디가 원자료)", "note": "간호대학"}, {"school": "고려대학교", "year": 2026, "track": "학생부종합(학업우수)", "quota": 12, "comp": 22.58, "c50": 1.84, "c70": 1.99, "src": "hakjum.school(어디가 원자료)", "note": "간호대학"}, {"school": "한양대학교", "year": 2026, "track": "학생부종합(서류형)", "quota": 13, "comp": 13.5, "c50": 1.72, "c70": 2.94, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "한양대학교", "year": 2026, "track": "학생부교과(추천형)", "quota": 4, "comp": 5.8, "c50": 1.53, "c70": 1.53, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경희대학교", "year": 2026, "track": "종합(기회균형II)", "quota": 4, "comp": 23, "c50": 2.11, "c70": 2.11, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경희대학교", "year": 2026, "track": "종합(네오르네상스)", "quota": 18, "comp": 18.56, "c50": 1.89, "c70": 1.94, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경희대학교", "year": 2026, "track": "종합(기회균형I)", "quota": 4, "comp": 17.5, "c50": 1.77, "c70": 1.77, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경희대학교", "year": 2026, "track": "교과(지역균형)", "quota": 14, "comp": 14, "c50": 1.74, "c70": 1.77, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경북대학교", "year": 2026, "track": "종합(농어촌)", "quota": 5, "comp": 12.8, "c50": 2.2, "c70": 2.21, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경북대학교", "year": 2026, "track": "종합(일반)", "quota": 8, "comp": 90, "c50": 3.56, "c70": 3.77, "src": "hakjum.school(어디가 원자료)", "note": "경쟁률 90은 원자료 값"}, {"school": "경북대학교", "year": 2026, "track": "종합(지역인재)", "quota": 25, "comp": 12.2, "c50": 2.61, "c70": 2.85, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경북대학교", "year": 2026, "track": "교과(교과우수자)", "quota": 10, "comp": 11.2, "c50": 1.85, "c70": 1.9, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "경북대학교", "year": 2026, "track": "교과(지역인재)", "quota": 30, "comp": 4.8, "c50": 2.07, "c70": 2.15, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "계명대학교", "year": 2026, "track": "종합(일반)", "quota": 21, "comp": 12.32, "c50": 2.46, "c70": 2.52, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "계명대학교", "year": 2026, "track": "종합(지역)", "quota": 21, "comp": 13.05, "c50": 2.5, "c70": 2.58, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "계명대학교", "year": 2026, "track": "교과(면접)", "quota": 8, "comp": 14.75, "c50": 2.36, "c70": 2.45, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "계명대학교", "year": 2026, "track": "교과(일반)", "quota": 20, "comp": 13.2, "c50": 1.87, "c70": 1.97, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "울산대학교", "year": 2026, "track": "교과(지역교과)", "quota": 13, "comp": 4.62, "c50": 2.02, "c70": 2.06, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "울산대학교", "year": 2026, "track": "교과(일반교과)", "quota": 24, "comp": 3.62, "c50": 2.48, "c70": 3.37, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "울산대학교", "year": 2026, "track": "종합(잠재역량)", "quota": 15, "comp": 8.8, "c50": 2.64, "c70": 1.96, "src": "hakjum.school(어디가 원자료)", "note": "50%>70% 역전, 원자료 재확인 필요"}, {"school": "울산대학교", "year": 2026, "track": "종합(지역인재)", "quota": 13, "comp": 8.46, "c50": 2.39, "c70": 2.4, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "아주대학교", "year": 2026, "track": "종합(ACE)", "quota": 25, "comp": 19, "c50": 1.99, "c70": 2.14, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "아주대학교", "year": 2026, "track": "교과(고교추천)", "quota": 7, "comp": 7.7, "c50": 1.69, "c70": 1.75, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "가천대(메디컬)", "year": 2026, "track": "종합(가천바람개비)", "quota": 33, "comp": 28.18, "c50": 2.79, "c70": 2.88, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "가천대(메디컬)", "year": 2026, "track": "종합(기회균형)", "quota": 4, "comp": 27.75, "c50": 3.16, "c70": 3.3, "src": "hakjum.school(어디가 원자료)", "note": ""}, {"school": "가천대(메디컬)", "year": 2026, "track": "교과(학생부우수자)", "quota": 28, "comp": 7.5, "c50": null, "c70": null, "src": "hakjum.school(어디가 원자료)", "note": "교과 등급컷 원자료 미공개"}, {"school": "가천대(메디컬)", "year": 2026, "track": "교과(지역균형)", "quota": 13, "comp": 40, "c50": null, "c70": null, "src": "hakjum.school(어디가 원자료)", "note": "교과 등급컷 원자료 미공개"}];
+function cutBox(nm){
+  const rows=DB.filter(r=>r.school===detKey(nm));
+  const yrs=[2028,2027,2026,2025,2024];
+  const have=[...new Set(rows.map(r=>r.year))];
+  if(!rows.length) return`<div class="dt-row"><b>📊 50%컷 / 70%컷</b><span style="color:var(--hint)">24·25·26학년도 실측값 수집 전 · 카드의 등급은 2025학년도 기반 추정치입니다</span></div>`;
+  let h='';
+  yrs.filter(y=>have.includes(y)).forEach(y=>{
+    h+=`<div class="dt-row"><b>📊 ${y}학년도 50%컷 / 70%컷</b><table class="cut"><tr><th>전형</th><th>50%</th><th>70%</th><th>경쟁률</th></tr>${rows.filter(r=>r.year===y).map(r=>`<tr><td>${r.track}${r.note?`<br><span style="color:var(--hint);font-size:10px">${r.note}</span>`:''}</td><td>${r.c50??'-'}</td><td>${r.c70??'-'}</td><td>${r.comp??'-'}</td></tr>`).join('')}</table></div>`;
+  });
+  const miss=[2026,2025,2024].filter(y=>!have.includes(y));
+  if(miss.length) h+=`<div class="dt-foot">${miss.join('·')}학년도: 수집 전</div>`;
+  return h;
+}
+function detBox(nm){
+  const x=DETAIL[detKey(nm)]; if(!x) return'';
+  return`<div class="dt-body">${cutBox(nm)}<div class="dt-row"><b>🚉 행신동에서</b>${x.d} · ${x.t}</div><div class="dt-row"><b>🚌 교통수단</b>${x.r}</div><div class="dt-row"><b>🏫 학교 소개</b>${x.s}</div><div class="dt-row"><b>🩺 간호학과</b>${x.n}</div>${HOSP[detKey(nm)]?`<div class="dt-row"><b>🏥 자대·연계병원</b>${HOSP[detKey(nm)]}</div>`:''}<div class="dt-foot">※ 거리·시간은 대략치입니다. 실제 경로는 지도앱으로 확인하세요.</div></div>`;
 }
 
 // ──────── 간호학과 탭 빌드 ────────
@@ -368,7 +461,7 @@ const KNMC_HTML=`<div class="sh"><span class="sh-badge" style="background:linear
 <div class="cgrid"><div class="card knmc-card">
   <div class="card-head">
     <div style="width:28px;height:28px;border-radius:50%;background:#1a237e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">🎖️</div>
-    <div class="card-nc"><div class="card-name" style="color:#1a237e">국군간호사관학교 🎖️</div><div class="card-loc">대전 유성구 자운대 | 국방부 직할 · 4년 전액 국비</div></div>
+    <div class="card-nc"><div class="card-name" style="color:#1a237e"><a class="sl" href="https://www.google.com/search?q=%EA%B5%AD%EA%B5%B0%EA%B0%84%ED%98%B8%EC%82%AC%EA%B4%80%ED%95%99%EA%B5%90" target="_blank" rel="noopener noreferrer">국군간호사관학교 🎖️</a></div><div class="card-loc">대전 유성구 자운대 | 국방부 직할 · 4년 전액 국비</div></div>
     <span class="bd" style="background:#1a237e;color:#fff;flex-shrink:0">특수대학</span>
   </div>
   <div class="cbadges"><span class="bd" style="background:#e8eaf6;color:#1a237e">총 90명 (남14·여76)</span><span class="bd" style="background:#fff3e0;color:#e65100">수시·정시 중복지원 가능</span></div>
@@ -382,11 +475,17 @@ const KNMC_HTML=`<div class="sh"><span class="sh-badge" style="background:linear
     <div style="font-size:11px;color:#283593;font-weight:500;line-height:1.65">① 1차: 공동시험(국·수·영) → ② 2차: 신체·체력·면접 → ③ 우선선발(내신) → ④ 종합선발(수능반영)</div>
   </div>
   <div class="cnote">수시 6·정시 3회 제한 예외 · 전액 국비 · 졸업 후 간호장교(소위) 임관 → 의무복무 7년 · 등급컷 비공개</div>
+  <details class="dt"><summary>ℹ️ 학교·간호학과 소개 / 가는 길</summary>${detBox('국군간호사관학교')}</details>
 </div></div>`;
 
-(function buildNursing(){
+function buildNursing(){
   const el=document.getElementById('tab-nursing');
-  let html=KNMC_HTML;
+  const y=window.scrollY;
+  let html='';
+  const fl=NURSING.filter(d=>FAV.has(d.nm));
+  html+=`<div class="sh"><span class="sh-badge" style="background:#FFF3C4;color:#7a5b00">⭐ 내 관심 학교</span><span class="sh-cnt">${fl.length}개교</span><div class="sh-line"></div></div>`;
+  html+=fl.length?`<div class="cgrid">${fl.map(d=>nCard(d,rankMap.get(d))).join('')}</div>`:`<div class="fav-empty">카드 오른쪽 위 ☆를 누르면 이곳 맨 위에 고정됩니다.</div>`;
+  html+=KNMC_HTML;
   NG.forEach(g=>{
     const items=NURSING.filter(d=>d.sv>=g.min&&d.sv<g.max);
     if(!items.length) return;
@@ -394,7 +493,9 @@ const KNMC_HTML=`<div class="sh"><span class="sh-badge" style="background:linear
     <div class="cgrid">${items.map(d=>nCard(d,rankMap.get(d))).join('')}</div>`;
   });
   el.innerHTML=html;
-})();
+  window.scrollTo(0,y);
+}
+buildNursing();
 
 // ──────── 기타학과 탭 빌드 ────────
 (function buildOther(){
